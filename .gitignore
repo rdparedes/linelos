@@ -1,0 +1,15 @@
+/target
+/classes
+/checkouts
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+/.lein-env
+/.lein-repl-history
+/.nrepl-port
+.hgignore
+.hg/
+*secret.json
+.idea
+.vscode

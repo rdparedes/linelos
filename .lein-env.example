@@ -1,0 +1,4 @@
+{:app-url "http://localhost"
+ :app-default-port 3478
+ :client-email "your_email@something.com"
+ :gmail-secret-path "./secret.json"}
