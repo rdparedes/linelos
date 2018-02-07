@@ -41,7 +41,7 @@
        fake-date "a date"]
    (fact "it returns data from mail given its id"
          (against-background [(execute-get-query conn mail-id) => (.setSnippet fake-message
-                                                                          fake-snippet)
+                                                                               fake-snippet)
                               (decode fake-message) => fake-body
                               (message-parser/get-vendor fake-snippet) => fake-vendor
                               (message-parser/get-amount fake-body) => fake-amount

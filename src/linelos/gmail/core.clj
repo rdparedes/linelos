@@ -35,10 +35,10 @@
   (with-open [reader (clojure.java.io/reader gmail-secret-path)]
     (let [client-secrets           (GoogleClientSecrets/load json-factory reader)
           code-flow-builder        (GoogleAuthorizationCodeFlow$Builder.
-                                     http-transport
-                                     json-factory
-                                     client-secrets
-                                     (list GmailScopes/GMAIL_READONLY))
+                                    http-transport
+                                    json-factory
+                                    client-secrets
+                                    (list GmailScopes/GMAIL_READONLY))
           flow                     (-> code-flow-builder
                                        (.setAccessType "offline")
                                        .build)]
@@ -49,10 +49,10 @@
   (with-open [reader (clojure.java.io/reader gmail-secret-path)]
     (let [client-secrets                  (GoogleClientSecrets/load json-factory reader)
           code-flow-builder               (GoogleAuthorizationCodeFlow$Builder.
-                                            http-transport
-                                            json-factory
-                                            client-secrets
-                                            (list GmailScopes/GMAIL_READONLY))
+                                           http-transport
+                                           json-factory
+                                           client-secrets
+                                           (list GmailScopes/GMAIL_READONLY))
           flow                            (-> code-flow-builder
                                               (.setAccessType "offline")
                                               .build)
@@ -66,12 +66,12 @@
   (with-open [reader (clojure.java.io/reader gmail-secret-path)]
     (let [client-secrets           (GoogleClientSecrets/load json-factory reader)
           credential               (.setAccessToken
-                                     (-> (GoogleCredential$Builder.)
-                                         (.setClientSecrets client-secrets)
-                                         (.setJsonFactory json-factory)
-                                         (.setTransport http-transport)
-                                         .build)
-                                     access-token)
+                                    (-> (GoogleCredential$Builder.)
+                                        (.setClientSecrets client-secrets)
+                                        (.setJsonFactory json-factory)
+                                        (.setTransport http-transport)
+                                        .build)
+                                    access-token)
           gmail                    (->
                                     (Gmail$Builder. http-transport json-factory credential)
                                     (.setApplicationName app-name)

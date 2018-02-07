@@ -12,9 +12,9 @@
  (facts
   "about transactions" :functional
   (future-fact "it returns a list of transactions given a Gmail search query"
-        (let [api-url           (str "http://localhost:" dev-server-port "/transactions")
-              response          (client/get api-url {:accept :json})]
-          (response :status) => 200
-          (first-transaction :tienda) => (contains #"[\w\-\s]+")
-          (first-transaction :monto) => float?
-          (first-transaction :fecha) => (contains #"[\w\-\s]+")))))
+               (let [api-url           (str "http://localhost:" dev-server-port "/transactions")
+                     response          (client/get api-url {:accept :json})]
+                 (response :status) => 200
+                 (first-transaction :tienda) => (contains #"[\w\-\s]+")
+                 (first-transaction :monto) => float?
+                 (first-transaction :fecha) => (contains #"[\w\-\s]+")))))

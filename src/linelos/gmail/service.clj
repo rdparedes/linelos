@@ -17,7 +17,7 @@
       (if (nil? next-page-token)
         messages
         (recur (execute-list-query conn query next-page-token)
-          messages)))))
+               messages)))))
 
 (defn get-message
   "Returns a message with detailed information"

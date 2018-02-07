@@ -30,7 +30,7 @@
     (if (blank? query)
       (response {})
       (let [conn          (gmail/get-connection
-                            (get-in session ["credentials" "access_token"]))
+                           (get-in session ["credentials" "access_token"]))
             transactions  (map #(get-message conn %) (search conn query))]
         (response {:transacciones transactions})))))
 
@@ -40,15 +40,15 @@
 
 (defroutes app-routes
   (GET "/transactions" {{query :query} :params, session :session}
-       (handle-get-transactions session query))
+    (handle-get-transactions session query))
   (GET "/oauth2callback" [code]
-       (handle-get-oauth2callback code))
+    (handle-get-oauth2callback code))
   (route/not-found "Not Found"))
 
 (defn wrap-unexpected-exception [handler]
   (fn [request]
     (try (handler request)
-      (catch Exception e server-error))))
+         (catch Exception e server-error))))
 
 (def app
   (-> app-routes
