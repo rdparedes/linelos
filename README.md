@@ -13,10 +13,11 @@ goodness of Clojure.
 
 ### An Example
 
-Say you have a bunch of emails from your bank with a similar format:
+Supose you have a bunch of emails from your bank with a similar format:
 
 ```
-// From:notifications@thebank.com
+From:notifications@thebank.com
+===============================
 
 Hello Roberto,
 
@@ -30,16 +31,18 @@ Amount $ 1.00.
 You can send Linelos a request with params similar to what you would type in a
 search inside your gmail client
 
-`localhost:3478/transactions?query=from:(notifications@thebank.com)%20payment`
+```bash
+curl -XGET localhost:3478/transactions?query=from:(notifications@thebank.com)%20payment
+```
 
-Then a [message parser](src/linelos/gmail/service.clj#L22) will process each
-email that matches the query and extract the fields according to the
+The [message parser](src/linelos/gmail/service.clj#L22) will process each email
+that matches the query and extract the fields according to the
 [provided regexes](src/linelos/gmail/message/pacificard.clj). You will end with
 a response that looks like this:
 
 ```json
 {
-  transacciones: [
+  "transacciones": [
     {
       "vendor": "Some vendor",
       "date": "2019-02-05T16:14:00Z",
