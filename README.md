@@ -1,7 +1,5 @@
 # Linelos
 
-## What this program does
-
 _Linelos_ is an api made in Clojure that uses Google
 [Gmail API](https://developers.google.com/gmail/api/) to search for the user
 emails, then it extracts data using regexes and returns a json object.
@@ -11,9 +9,9 @@ It also takes advantage of Clojure's interop with Java to use the
 So in the end you take the compatibility of Java with the functional programming
 goodness of Clojure.
 
-### An Example
+## What this program does
 
-Supose you have a bunch of emails from your bank with a similar format:
+Supose you have a bunch of emails from your bank with this format:
 
 ```
 From:notifications@thebank.com
@@ -28,7 +26,7 @@ Date of transaction 05/02/2019 at 16:14
 Amount $ 1.00.
 ```
 
-You can send Linelos a request with params similar to what you would type in a
+You can send Linelos a request with a query param similar to what you would
 search inside your gmail client
 
 ```bash
@@ -62,17 +60,26 @@ a response that looks like this:
 * Currently, only [one format](src/linelos/gmail/message/pacificard.clj) of
   message is supported. That is just the basic idea put into workable code, but
   ideally the parsing and regex stuff would be provided with the request.
-* Document the API
+* Documentation for the API.
 
 ## Setup
 
-* [Turn on the Gmail API](https://developers.google.com/gmail/api/quickstart/java#step_1_turn_on_the_api_name)
-* Copy your `client_secret.json` into the root directory of this project
-* Configure the local environment:
-  * Rename `.lein-env.example` to `.lein-env` and edit it accordingly
-* Run `lein ring server-headless` to start the local server
+* [Create a new API](https://console.developers.google.com/flows/enableapi?apiid=gmail)
+  from Google if you don't have one yet and download your client secret.
+* Copy your `client_secret.json` into the root directory of the project.
 
-## Local Development
+### Configure your local environment
+
+* Copy `.lein-env.example` to `.lein-env` and edit it.
+* Run `lein ring server-headless` to start a local server.
+* Go to http://localhost:3478/transactions.
+
+### Creating a Docker for production
+
+* Copy `.lein-env.example` to `.lein-env.prod` and edit it.
+* Run `docker build -t linelos .`
+
+## Development Commands
 
 | Command                            | Description                                         |
 | ---------------------------------- | --------------------------------------------------- |
@@ -84,3 +91,10 @@ a response that looks like this:
 | `lein kibit`                       | Analyze code for more idiomatic functions or macros |
 | `lein cljfmt fix`                  | Run linter and fix files                            |
 | `lein check`                       | Run all checks and tests                            |
+
+## Useful docs
+
+* Gmail - Using OAuth 2.0 for Web Server Applications:
+  https://developers.google.com/identity/protocols/OAuth2WebServer
+* Gmail API - Java Quickstart:
+  https://developers.google.com/gmail/api/quickstart/java
