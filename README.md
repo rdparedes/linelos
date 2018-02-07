@@ -74,7 +74,7 @@ a response that looks like this:
 * Run `lein ring server-headless` to start a local server.
 * Go to http://localhost:3478/transactions.
 
-### Creating a Docker for production
+### Creating a Docker container for production
 
 * Copy `.lein-env.example` to `.lein-env.prod` and edit it.
 * Run `docker build -t linelos .`
