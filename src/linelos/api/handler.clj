@@ -4,6 +4,7 @@
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
             [ring.middleware.session :refer [wrap-session]]
+            [ring.middleware.cors :refer [wrap-cors]]
             [linelos.gmail.service :refer [get-message search]]
             [linelos.gmail.core :as gmail]
             [clojure.string :refer [blank?]]))
@@ -55,4 +56,6 @@
       (wrap-session)
       (wrap-json-response)
       (wrap-defaults api-defaults)
+      (wrap-cors :access-control-allow-origin [#".*"]
+                 :access-control-allow-methods [:get])
       (wrap-unexpected-exception)))

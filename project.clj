@@ -25,6 +25,7 @@
    [ring/ring-defaults "0.3.1"]
    [ring/ring-jetty-adapter "1.6.3"]
    [ring/ring-json "0.4.0"]
+   [ring-cors "0.1.11"]
    [clj-http "3.7.0"]
    [cheshire "5.8.0"]
    [environ "1.1.0"]
