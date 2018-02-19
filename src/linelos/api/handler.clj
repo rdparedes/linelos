@@ -25,9 +25,15 @@
              "Content-Type" "application/json"}
    :body    ""})
 
+(defn forbidden [body]
+  {:status  403
+   :headers {"Content-Type" "application/json"}
+   :body    body})
+
 (defn- handle-get-transactions [session query]
   (if-not (session "credentials")
-    (redirect (gmail/get-authorization-url))
+    (forbidden {:error "Necesitas hacer login en Google para ver esto"
+                :location (gmail/get-authorization-url)})
     (if (blank? query)
       (response {})
       (let [conn          (gmail/get-connection

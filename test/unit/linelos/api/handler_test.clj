@@ -47,9 +47,9 @@
                 (response :status) => 200
                 response-body => {})))
  (facts "when user is not authenticated"
-        (fact "it redirects to gmail authorization page when credentials are not stored in session"
+        (fact "it responds with a redirect url to gmail authorization page when credentials are not stored in session"
               (against-background (get-authorization-url) => "some-auth-url")
-              (let [response     (app (mock/request :get "/transactions"))
-                    redirect-url (get (response :headers) "Location")]
-                (response :status) => 302
-                redirect-url => (contains "/some-auth-url")))))
+              (let [response      (app (mock/request :get "/transactions"))
+                    response-body (parse-string (response :body) true)]
+                (response :status) => 403
+                (response-body :location) => (contains "some-auth-url")))))
