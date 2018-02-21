@@ -60,6 +60,7 @@ a response that looks like this:
 * Currently, only [one format](src/linelos/gmail/message/pacificard.clj) of
   message is supported. That is just the basic idea put into workable code, but
   ideally the parsing and regex stuff would be provided with the request.
+* Move Google authentication and token obtaining logic to Frontend apps.
 * Documentation for the API.
 
 ## Setup
