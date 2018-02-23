@@ -1,5 +1,8 @@
 (ns linelos.api.handler
-  (:require [compojure.core :refer [GET defroutes]]
+  (:require [linelos.settings
+             :refer
+             [frontend-app-url]]
+            [compojure.core :refer [GET defroutes]]
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
@@ -32,8 +35,9 @@
 
 (defn- handle-get-transactions [session query]
   (if-not (session "credentials")
-    (forbidden {:error "Necesitas hacer login en Google para ver esto"
-                :location (gmail/get-authorization-url)})
+    (forbidden
+     {:error    "Necesitas hacer login en Google para ver esto"
+      :location (gmail/get-authorization-url)})
     (if (blank? query)
       (response {})
       (let [conn          (gmail/get-connection
@@ -43,7 +47,7 @@
 
 (defn handle-get-oauth2callback [code]
   (let [credentials (gmail/get-credentials code)]
-    (assoc (redirect "/transactions") :session {"credentials" credentials})))
+    (assoc (redirect frontend-app-url) :session {"credentials" credentials})))
 
 (defroutes app-routes
   (GET "/transactions" {{query :query} :params, session :session}
