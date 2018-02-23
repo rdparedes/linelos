@@ -2,9 +2,12 @@
   (:require [linelos.settings
              :refer
              [frontend-app-url]]
+            [environ.core :refer [env]]
             [compojure.core :refer [GET defroutes]]
             [compojure.route :as route]
-            [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
+            [ring.middleware.defaults
+             :refer
+             [wrap-defaults api-defaults secure-api-defaults]]
             [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
             [ring.middleware.session :refer [wrap-session]]
             [ring.middleware.cors :refer [wrap-cors]]
@@ -61,11 +64,16 @@
     (try (handler request)
          (catch Exception e server-error))))
 
+(def api-defaults-wrapper
+  (if (= (get env :environment) "dev")
+    api-defaults
+    secure-api-defaults))
+
 (def app
   (-> app-routes
       (wrap-session)
       (wrap-json-response)
-      (wrap-defaults api-defaults)
-      (wrap-cors :access-control-allow-origin [#".*"]
+      (wrap-defaults api-defaults-wrapper)
+      (wrap-cors :access-control-allow-origin  [#".*"]
                  :access-control-allow-methods [:get])
       (wrap-unexpected-exception)))
