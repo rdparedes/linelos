@@ -1,5 +1,4 @@
-{:environment "dev"
- :app-url "http://localhost"
+{:app-url "http://localhost"
  :frontend-app-url "http://localhost:9090"
  :app-default-port 3478
  :client-email "your_email@something.com"
