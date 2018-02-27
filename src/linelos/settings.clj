@@ -4,6 +4,6 @@
 (def app-name "linelos")
 (def app-url (get env :app-url))
 (def frontend-app-url (get env :frontend-app-url))
-(def app-default-port (get env :app-default-port))
+(def app-default-port (get env :app-default-port "80"))
 (def email-address (get env :client-email))
 (def gmail-secret-path (get env :gmail-secret-path))
