@@ -28,8 +28,11 @@
 
 (def ^:private json-factory (JacksonFactory/getDefaultInstance))
 
+(def ^:private app-port
+  (if (= app-default-port "80") "" (str ":" app-default-port)))
+
 (def ^:private oauth-url
-  (str app-url ":" app-default-port "/oauth2callback"))
+  (str app-url app-port "/oauth2callback"))
 
 (defn get-authorization-url []
   (with-open [reader (clojure.java.io/reader gmail-secret-path)]
