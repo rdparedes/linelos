@@ -63,9 +63,11 @@
 
 (def app
   (-> app-routes
-      (wrap-session)
       (wrap-json-response)
-      (wrap-defaults api-defaults)
+      (wrap-defaults (assoc-in api-defaults [:session :flash] false))
       (wrap-cors :access-control-allow-origin [#".*"]
                  :access-control-allow-methods [:get])
+      (wrap-session
+       {:cookie-attrs {:secure true}
+        :cookie-name  "session"})
       (wrap-unexpected-exception)))
