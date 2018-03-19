@@ -65,8 +65,9 @@
   (-> app-routes
       (wrap-json-response)
       (wrap-defaults (assoc-in api-defaults [:session :flash] false))
-      (wrap-cors :access-control-allow-origin [#".*"]
-                 :access-control-allow-methods [:get])
+      (wrap-cors :access-control-allow-origin #".*"
+                 :access-control-allow-methods [:get]
+                 :access-control-allow-credentials "true")
       (wrap-session
        {:cookie-attrs {:secure true}
         :cookie-name  "session"})
